@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a3d1f"/>
+      <stop offset="100%" stop-color="#1f7a42"/>
+    </linearGradient>
+    <linearGradient id="ball" x1="30%" y1="20%" x2="80%" y2="90%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e8e8e8"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0.32" dy="0.64" stdDeviation="0.64" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Pozadí se zaoblenými rohy -->
+  <rect width="32" height="32" rx="5.76" fill="url(#bg)"/>
+
+  <!-- Dekorativní linie "hřiště" -->
+  <circle cx="16" cy="16" r="14.72" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
+  <line x1="16" y1="3.2" x2="16" y2="28.8" stroke="rgba(255,255,255,0.05)" stroke-width="0.48"/>
+
+  <!-- Fotbalový míč – stín -->
+  <circle cx="16.48" cy="14.72" r="12.16" fill="rgba(0,0,0,0.2)" filter="url(#shadow)"/>
+
+  <!-- Fotbalový míč – bílá plocha -->
+  <circle cx="16" cy="14.08" r="12.16" fill="url(#ball)" stroke="#ddd" stroke-width="0.16"/>
+
+  <!-- Hexagonální vzor – středový pětiúhelník -->
+  <polygon points="16,10.9184 19.006860281918758,13.103011870584167 17.858341853647882,16.637788129415835 14.141658146352118,16.637788129415835 12.993139718081242,13.103011870584165" fill="#1a1a2e" opacity="0.85"/>
+
+  <!-- Hexagonální vzor – okolní šestiúhelníky -->
+  <polygon points="17.6112,4.966119738845025 19.2224,7.7568 17.6112,10.547480261154975 14.3888,10.547480261154975 12.7776,7.7568 14.388799999999998,4.966119738845025" fill="#1a1a2e" opacity="0.75"/>
+  <polygon points="25.165703392442133,12.79599837365948 23.009496926511346,15.190708259277836 19.85751409790673,14.520733626786686 18.8617377352329,11.456049108677185 21.017944201163687,9.061339223058829 24.1699270297683,9.731313855549976" fill="#1a1a2e" opacity="0.75"/>
+  <polygon points="20.05351622732945,22.40032361446639 17.109707344621935,21.089655455818935 16.772874824588246,17.884908100184212 19.37985118726208,15.990828903196944 22.323660069969595,17.3014970618444 22.660492590003283,20.506244417479124" fill="#1a1a2e" opacity="0.75"/>
+  <polygon points="9.339507409996719,20.506244417479127 9.676339930030405,17.3014970618444 12.62014881273792,15.990828903196944 15.227125175411754,17.88490810018421 14.890292655378065,21.089655455818935 11.94648377267055,22.400323614466394" fill="#1a1a2e" opacity="0.75"/>
+  <polygon points="7.8300729702317,9.731313855549976 10.982055798836315,9.061339223058827 13.1382622647671,11.456049108677181 12.142485902093274,14.520733626786683 8.990503073488656,15.190708259277834 6.834296607557869,12.795998373659478" fill="#1a1a2e" opacity="0.75"/>
+
+  <!-- Odlesk míče -->
+  <ellipse cx="13.568" cy="10.432" rx="3.4048000000000003" ry="2.1888"
+           fill="white" opacity="0.35" transform="rotate(-25, 13.568, 10.432)"/>
+
+  <!-- Text "2026" -->
+  <text x="16" y="28.16"
+        font-family="'Arial Black', 'Impact', sans-serif"
+        font-weight="900"
+        font-size="4.16"
+        fill="white"
+        text-anchor="middle"
+        letter-spacing="0.16"
+        opacity="0.95">2026</text>
+</svg>

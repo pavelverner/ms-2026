@@ -65,23 +65,17 @@ const matches = [
   { team_home: 'Chorvatsko', flag_home: 'hr',     team_away: 'Ghana',      flag_away: 'gh', match_date: '2026-06-28T02:00:00', stage: 'group', group_name: 'L' },
 
   // ═══════════════ VYŘAZOVACÍ FÁZE ═══════════════
-  // Round of 32 (16 zápasů)
-  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-06-29T19:00:00', stage: 'r32', group_name: null },
-  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-06-29T22:00:00', stage: 'r32', group_name: null },
-  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-06-30T01:00:00', stage: 'r32', group_name: null },
-  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-06-30T19:00:00', stage: 'r32', group_name: null },
-  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-06-30T22:00:00', stage: 'r32', group_name: null },
-  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-07-01T01:00:00', stage: 'r32', group_name: null },
-  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-07-01T19:00:00', stage: 'r32', group_name: null },
-  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-07-01T22:00:00', stage: 'r32', group_name: null },
-  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-07-02T01:00:00', stage: 'r32', group_name: null },
-  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-07-02T19:00:00', stage: 'r32', group_name: null },
-  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-07-02T22:00:00', stage: 'r32', group_name: null },
-  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-07-03T01:00:00', stage: 'r32', group_name: null },
-  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-07-03T19:00:00', stage: 'r32', group_name: null },
-  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-07-03T22:00:00', stage: 'r32', group_name: null },
-  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-07-04T01:00:00', stage: 'r32', group_name: null },
-  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-07-04T19:00:00', stage: 'r32', group_name: null },
+  // Round of 32 — 8 vybraných zápasů (nejzajímavější pavouk)
+  // Bracket: 1A vs 3F/G/H, 1C vs 3A/D/E, 1E vs 3C/D/F, 1G vs 3A/B/H
+  //          2A vs 2C,      2E vs 2G,     2B vs 2D,      2F vs 2H
+  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-06-29T19:00:00', stage: 'r32', group_name: null },  // 1C vs 3x (Brazílie/Maroko vs outsider)
+  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-06-29T22:00:00', stage: 'r32', group_name: null },  // 1A vs 3x (Mexiko/ČR vs outsider)
+  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-06-30T19:00:00', stage: 'r32', group_name: null },  // 1H vs 3x (Španělsko/Uruguay vs outsider)
+  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-06-30T22:00:00', stage: 'r32', group_name: null },  // 1J vs 3x (Argentina vs outsider)
+  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-07-01T19:00:00', stage: 'r32', group_name: null },  // 2C vs 2I (Maroko/Brazílie vs Francie/Senegal)
+  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-07-01T22:00:00', stage: 'r32', group_name: null },  // 1E vs 3x (Německo vs outsider)
+  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-07-02T19:00:00', stage: 'r32', group_name: null },  // 1K vs 3x (Portugalsko vs outsider)
+  { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-07-02T22:00:00', stage: 'r32', group_name: null },  // 1L vs 3x (Anglie/Chorvatsko vs outsider)
 
   // Osmifinále Round of 16 (8 zápasů)
   { team_home: 'TBD', flag_home: '', team_away: 'TBD', flag_away: '', match_date: '2026-07-06T22:00:00', stage: 'r16', group_name: null },
