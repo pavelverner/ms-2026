@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MS 2026 Tipovačka</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#1a6b3c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Tipovačka">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css">
+</head>
+<body>
+  <!-- AUTH OVERLAY -->
+  <div id="auth-overlay" class="overlay">
+    <div class="auth-box">
+      <div class="auth-logo">⚽ MS 2026</div>
+      <h1>Tipovačka</h1>
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchAuth('login')">Přihlásit se</button>
+        <button class="auth-tab" onclick="switchAuth('register')">Registrace</button>
+      </div>
+      <form id="login-form" onsubmit="submitLogin(event)">
+        <input type="text" id="login-username" placeholder="Uživatelské jméno" required autocomplete="username">
+        <input type="password" id="login-password" placeholder="Heslo" required autocomplete="current-password">
+        <button type="submit" class="btn-primary">Přihlásit se</button>
+        <div id="login-error" class="form-error"></div>
+      </form>
+      <form id="register-form" style="display:none" onsubmit="submitRegister(event)">
+        <input type="text" id="reg-username" placeholder="Uživatelské jméno" required autocomplete="username">
+        <input type="password" id="reg-password" placeholder="Heslo (min. 4 znaky)" required autocomplete="new-password">
+        <button type="submit" class="btn-primary">Zaregistrovat se</button>
+        <div id="reg-error" class="form-error"></div>
+      </form>
+      <p class="auth-note">První registrovaný uživatel získá admin práva.</p>
+    </div>
+  </div>
+
+  <!-- MAIN APP -->
+  <div id="app" style="display:none">
+    <header>
+      <div class="header-left">
+        <span class="header-logo">⚽</span>
+        <span class="header-title">MS 2026 Tipovačka</span>
+      </div>
+      <div class="header-right">
+        <span id="header-user" class="header-user"></span>
+        <button class="btn-logout" onclick="logout()">Odhlásit</button>
+      </div>
+    </header>
+
+    <nav class="main-nav">
+      <button class="nav-tab active" data-tab="matches" onclick="switchTab('matches')">⚽ Zápasy</button>
+      <button class="nav-tab" data-tab="leaderboard" onclick="switchTab('leaderboard')">🏆 Žebříček</button>
+      <button class="nav-tab" data-tab="my-predictions" onclick="switchTab('my-predictions')">📋 Moje tipy</button>
+      <button class="nav-tab" data-tab="special" onclick="switchTab('special')">⭐ Speciální tipy</button>
+      <button class="nav-tab" data-tab="admin" id="admin-tab" onclick="switchTab('admin')" style="display:none">⚙️ Admin</button>
+    </nav>
+
+    <!-- TAB: MATCHES -->
+    <div id="tab-matches" class="tab-content active">
+      <div class="tab-header">
+        <h2>Zápasy &amp; Tipy</h2>
+        <div class="points-legend">
+          <span class="legend-item exact">5 b — přesný výsledek</span>
+          <span class="legend-item diff">3 b — správný vítěz + rozdíl</span>
+          <span class="legend-item winner">2 b — správný vítěz</span>
+          <span class="legend-item wrong">0 b — špatný tip</span>
+        </div>
+      </div>
+      <div id="matches-container"></div>
+    </div>
+
+    <!-- TAB: LEADERBOARD -->
+    <div id="tab-leaderboard" class="tab-content">
+      <div class="tab-header">
+        <h2>Žebříček</h2>
+        <button class="btn-refresh" onclick="loadLeaderboard()">↻ Aktualizovat</button>
+      </div>
+      <div id="leaderboard-container"></div>
+    </div>
+
+    <!-- TAB: MY PREDICTIONS -->
+    <div id="tab-my-predictions" class="tab-content">
+      <div class="tab-header">
+        <h2>Moje tipy</h2>
+      </div>
+      <div id="my-predictions-container"></div>
+    </div>
+
+    <!-- TAB: SPECIAL BETS -->
+    <div id="tab-special" class="tab-content">
+      <div class="tab-header">
+        <h2>⭐ Speciální tipy</h2>
+        <div class="points-legend">
+          <span class="legend-item exact">15 b — vítěz turnaje</span>
+          <span class="legend-item diff">10 b — skupina / střelec</span>
+          <span class="legend-item winner">8 b — finalista / statistiky</span>
+        </div>
+      </div>
+      <div id="special-bets-container"></div>
+    </div>
+
+    <!-- TAB: ADMIN -->
+    <div id="tab-admin" class="tab-content">
+      <div class="tab-header">
+        <h2>Admin panel</h2>
+      </div>
+
+      <div class="admin-section">
+        <h3>Zadat výsledek zápasu</h3>
+        <div id="admin-matches-list"></div>
+      </div>
+
+      <div class="admin-section">
+        <h3>Přidat zápas</h3>
+        <form onsubmit="adminAddMatch(event)" class="admin-form">
+          <div class="form-row">
+            <input type="text" id="add-flag-home" placeholder="🏳️ Vlajka domácí" maxlength="10">
+            <input type="text" id="add-team-home" placeholder="Domácí tým *" required>
+            <span class="vs-label">vs</span>
+            <input type="text" id="add-team-away" placeholder="Hosté *" required>
+            <input type="text" id="add-flag-away" placeholder="🏳️ Vlajka hostů" maxlength="10">
+          </div>
+          <div class="form-row">
+            <input type="datetime-local" id="add-date" required>
+            <select id="add-stage" required>
+              <option value="">-- Fáze --</option>
+              <option value="group">Skupina</option>
+              <option value="r32">Osmifinále</option>
+              <option value="r16">Osmifinále (R16)</option>
+              <option value="qf">Čtvrtfinále</option>
+              <option value="sf">Semifinále</option>
+              <option value="3rd">O 3. místo</option>
+              <option value="final">Finále</option>
+            </select>
+            <input type="text" id="add-group" placeholder="Skupina (A–L)">
+            <button type="submit" class="btn-primary">Přidat zápas</button>
+          </div>
+          <div id="add-match-error" class="form-error"></div>
+        </form>
+      </div>
+
+      <div class="admin-section">
+        <h3>Speciální tipy — vyhodnocení</h3>
+        <div id="admin-special-bets-list"></div>
+      </div>
+
+      <div class="admin-section">
+        <h3>Automatické výsledky</h3>
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">
+          Nastavte <code>FOOTBALL_API_KEY</code> v prostředí pro automatické stahování výsledků každých 20 minut.<br>
+          Klíč zdarma: <a href="https://www.football-data.org/client/register" target="_blank">football-data.org</a>
+        </p>
+        <button class="btn-primary" style="width:auto;padding:9px 20px" onclick="triggerFetch()">
+          ↻ Stáhnout výsledky teď
+        </button>
+        <div id="fetch-result" style="margin-top:10px;font-size:13px;color:var(--text-muted)"></div>
+      </div>
+
+      <div class="admin-section">
+        <h3>Uživatelé</h3>
+        <div id="admin-users-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
